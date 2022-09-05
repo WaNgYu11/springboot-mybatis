@@ -1,5 +1,7 @@
 package com.wy.user;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wy.entity.User;
 import com.wy.mapper.UserMapper;
 import com.wy.service.UserService;
@@ -18,18 +20,26 @@ public class UserApplicationTest {
     @Autowired
     private UserService userService;
 
+
     @Test
-    void testAddUser(){
+    void testLambdaQueryWrapperUser() {
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.gt(User::getAge, 20);
+        this.userMapper.selectList(queryWrapper).forEach(System.out::println);
+    }
 
 
-        User user=new User();
+    @Test
+    void testAddUser() {
+
+
+        User user = new User();
         user.setName("马踏燕mm");
         user.setAge(15);
         user.setEmail("1qq.com");
         this.userService.addUser(user);
-        System.out.println("添加成功：===="+user);
+        System.out.println("添加成功：====" + user);
     }
-
 
 
 }
