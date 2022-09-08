@@ -10,8 +10,5 @@ import java.util.List;
 public interface UserMapper extends BaseMapper<User> {
 
 
-    List<User> selectUserAll();
-
-
-    void insertUser(User user);
+    List<User> selectByUserAndAdmin();
 }

@@ -6,39 +6,45 @@ import com.wy.entity.User;
 import com.wy.mapper.UserMapper;
 import com.wy.service.UserService;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 
 @SpringBootTest
 public class UserApplicationTest {
 
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
-    @Autowired
+    @Resource
     private UserService userService;
 
 
     @Test
-    void testLambdaQueryWrapperUser() {
-        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.gt(User::getAge, 20);
-        this.userMapper.selectList(queryWrapper).forEach(System.out::println);
+    void testQueryUserAndAdmin2() {
+
+
+        List<User> userList = this.userService.findByUserAndAdmin();
+        userList.forEach(System.out::println);
+
     }
 
 
+    /**
+     * 查询用户mybatis-plus
+     */
     @Test
-    void testAddUser() {
-
-
-        User user = new User();
-        user.setName("马踏燕mm");
-        user.setAge(15);
-        user.setEmail("1qq.com");
-        this.userService.addUser(user);
-        System.out.println("添加成功：====" + user);
+    void testQueryUserAndAdmin() {
+        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.like(User::getUserName, "o")
+                .ge(User::getUserAge, 20);
+        List<User> userList = this.userMapper.selectList(lambdaQueryWrapper);
+        for (User user : userList) {
+            System.out.println(user);
+        }
     }
 
 

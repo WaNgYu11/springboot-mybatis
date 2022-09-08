@@ -19,11 +19,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/demo")
-    @ResponseBody
-    public User demo(@Valid User user, BindResult result) {
-        this.userService.addUser(user);
-        return user;
-    }
+
+
+
+
 
 }

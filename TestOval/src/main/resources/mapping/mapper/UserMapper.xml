@@ -5,17 +5,25 @@
 <mapper namespace="com.wy.mapper.UserMapper">
 
 
-    <select id="selectUserAll" resultType="com.wy.entity.User">
-        select id, name, age, email, isDeleted
-        from user;
+    <resultMap id="userMap" type="com.wy.entity.User">
+        <id column="userId" property="userId"/>
+        <result column="adminId" property="adminId"/>
+        <result column="userName" property="userName"/>
+        <result column="userAge" property="userAge"/>
+        <result column="userEmail" property="userEmail"/>
+    </resultMap>
 
+
+    <select id="selectByUserAndAdmin" resultMap="userMap">
+        SELECT userId,
+               u.adminId,
+               adminName,
+               userName,
+               userAge,
+               userEmail
+        FROM `user` u
+                 LEFT JOIN admin a ON u.adminId = a.adminId
     </select>
-
-
-    <insert id="insertUser">
-        insert into user(name, age)
-        values (#{name}, #{age});
-    </insert>
 
 
 </mapper>
