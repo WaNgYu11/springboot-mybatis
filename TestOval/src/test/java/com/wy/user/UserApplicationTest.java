@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 
 
 @SpringBootTest
@@ -23,9 +24,18 @@ public class UserApplicationTest {
     private UserService userService;
 
 
+    /**
+     * LambdaQueryWrapper查询
+     */
+    @Test
+    void testQueryUserAndAdmin3() {
+
+
+    }
+
+
     @Test
     void testQueryUserAndAdmin2() {
-
 
         List<User> userList = this.userService.findByUserAndAdmin();
         userList.forEach(System.out::println);
@@ -38,13 +48,10 @@ public class UserApplicationTest {
      */
     @Test
     void testQueryUserAndAdmin() {
-        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.like(User::getUserName, "o")
-                .ge(User::getUserAge, 20);
-        List<User> userList = this.userMapper.selectList(lambdaQueryWrapper);
-        for (User user : userList) {
-            System.out.println(user);
-        }
+        List<User> userList = this.userMapper.selectList(null);
+        Integer integer = userList.stream().map(User::getUserAge).reduce(Integer::sum).orElse(1);
+        System.out.println(integer);
+
     }
 
 
