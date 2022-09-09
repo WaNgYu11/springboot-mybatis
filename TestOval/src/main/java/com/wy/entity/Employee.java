@@ -20,7 +20,7 @@ public class Employee {
     @TableId("empId")
     private Integer empId;
     @TableField("deptId")
-    private Dept dept;
+    private Integer deptId;
     @TableField("empName")
     private String empName;
     @TableField("empGender")
