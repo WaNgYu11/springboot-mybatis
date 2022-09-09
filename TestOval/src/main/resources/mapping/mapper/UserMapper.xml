@@ -7,22 +7,29 @@
 
     <resultMap id="userMap" type="com.wy.entity.User">
         <id column="userId" property="userId"/>
-        <result column="adminId" property="adminId"/>
         <result column="userName" property="userName"/>
         <result column="userAge" property="userAge"/>
         <result column="userEmail" property="userEmail"/>
+        <association property="admin" javaType="com.wy.entity.Admin">
+            <id column="adminId" property="adminId"/>
+            <result column="adminCode" property="adminCode"/>
+            <result column="adminName" property="adminName"/>
+            <result column="adminPwd" property="adminPwd"/>
+            <result column="adminPic" property="adminPic"/>
+        </association>
     </resultMap>
-
-
 
 
     <select id="selectByUserAndAdmin" resultMap="userMap">
         SELECT userId,
-               u.adminId,
-               adminName,
                userName,
                userAge,
-               userEmail
+               userEmail,
+               u.adminId,
+               a.adminCode,
+               a.adminName,
+               a.adminPwd,
+               a.adminPic
         FROM `user` u
                  LEFT JOIN admin a ON u.adminId = a.adminId
     </select>

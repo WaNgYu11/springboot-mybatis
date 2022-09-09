@@ -2,6 +2,7 @@ package com.wy.user;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.wy.entity.Admin;
 import com.wy.entity.User;
 import com.wy.mapper.UserMapper;
 import com.wy.service.UserService;
@@ -48,10 +49,9 @@ public class UserApplicationTest {
      */
     @Test
     void testQueryUserAndAdmin() {
-        List<User> userList = this.userMapper.selectList(null);
-        Integer integer = userList.stream().map(User::getUserAge).reduce(Integer::sum).orElse(1);
-        System.out.println(integer);
-
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        List<User> userList = this.userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
     }
 
 

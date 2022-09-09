@@ -16,7 +16,7 @@ public class User {
     @TableField("userId")
     private Integer userId;
     @TableField("adminId")
-    private Integer adminId;
+    private Admin admin;
     @TableField("userName")
     private String userName;
     @TableField("userAge")

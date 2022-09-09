@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+</head>
+<body>
+<table style="border: 1px solid">
+    <tr>
+        <td>用户姓名</td>
+        <td>用户年龄</td>
+        <td>用户邮箱</td>
+        <td>所属管理员</td>
+    </tr>
+    <tr th:each="user:${userList}">
+        <td th:text="${user.userName}"></td>
+        <td th:text="${user.userAge}"></td>
+        <td th:text="${user.userEmail}"></td>
+        <td th:text="${user.admin.adminName}"></td>
+    </tr>
+</table>
+</body>
+</html>
