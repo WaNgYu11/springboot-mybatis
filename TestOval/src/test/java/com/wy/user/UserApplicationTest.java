@@ -35,6 +35,7 @@ public class UserApplicationTest {
     }
 
 
+
     @Test
     void testQueryUserAndAdmin2() {
 
